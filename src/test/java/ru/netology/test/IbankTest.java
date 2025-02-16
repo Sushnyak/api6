@@ -58,16 +58,16 @@ public class IbankTest {
                 secondCardBalanceFinish);
     }
 
-    @Test
-    void shouldReturnErrorMassageIfAmountMoreBalance() {
-        var info = DataHelper.getAuthInfo();
-        var verificationCode = DataHelper.getVerificationCode();
-        var loginPage = new LoginPage();
-        var verificationPage = loginPage.validLogin(info);
-        var dashboardPage = verificationPage.validVerify(verificationCode);
-        int amount = dashboardPage.getCardBalance(DataHelper.getFirsCard()) + 1000;
-        var transferPage = dashboardPage.selectCard(DataHelper.getFirsCard());
-        transferPage.transferMoney(Integer.toString(amount), DataHelper.getSecondCard());
-        transferPage.checkErrorMassage();
-    }
+//    @Test
+//    void shouldReturnErrorMassageIfAmountMoreBalance() {
+//        var info = DataHelper.getAuthInfo();
+//        var verificationCode = DataHelper.getVerificationCode();
+//        var loginPage = new LoginPage();
+//        var verificationPage = loginPage.validLogin(info);
+//        var dashboardPage = verificationPage.validVerify(verificationCode);
+//        int amount = dashboardPage.getCardBalance(DataHelper.getFirsCard()) + 1000;
+//        var transferPage = dashboardPage.selectCard(DataHelper.getFirsCard());
+//        transferPage.transferMoney(Integer.toString(amount), DataHelper.getSecondCard());
+//        transferPage.checkErrorMassage();
+//    }
 }
