@@ -2,6 +2,7 @@ package ru.netology.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.conditions.Visible;
 import ru.netology.data.DataHelper;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -23,7 +24,20 @@ public class TransferPage {
         return new DashboardPage();
     }
 
+    public DashboardPage transferMoneyNoCardNumber(String amount) {
+        amountInput.setValue(amount);
+        buttonTransfer.click();
+        return new DashboardPage();
+    }
+
+    public DashboardPage transferMoneyNoAmount(DataHelper.CardInfo cardInfo) {
+        cardWriteOff.setValue(cardInfo.getCardNumber());
+        buttonTransfer.click();
+        return new DashboardPage();
+    }
+
     public void checkErrorMassage() {
-        $("Ошибка").shouldBe(visible);
+        $("[data-test-id=error-notification]").shouldHave(Condition.text("Ошибка!"))
+                .should(visible);
     }
 }

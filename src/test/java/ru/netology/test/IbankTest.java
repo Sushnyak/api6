@@ -70,4 +70,30 @@ public class IbankTest {
         transferPage.transferMoney(Integer.toString(amount), DataHelper.getSecondCard());
         transferPage.checkErrorMassage();
     }
+
+    @Test
+    void shouldReturnErrorIfNoCardNumber() {
+        int amount = 1000;
+        var info = DataHelper.getAuthInfo();
+        var verificationCode = DataHelper.getVerificationCode();
+        var loginPage = new LoginPage();
+        var verificationPage = loginPage.validLogin(info);
+        var dashboardPage = verificationPage.validVerify(verificationCode);
+        var transferPage = dashboardPage.selectCard(DataHelper.getFirsCard());
+        transferPage.transferMoneyNoCardNumber(Integer.toString(amount));
+        transferPage.checkErrorMassage();
+    }
+
+    @Test
+    void shouldReturnErrorIfNoAmount() {
+        int amount = 1000;
+        var info = DataHelper.getAuthInfo();
+        var verificationCode = DataHelper.getVerificationCode();
+        var loginPage = new LoginPage();
+        var verificationPage = loginPage.validLogin(info);
+        var dashboardPage = verificationPage.validVerify(verificationCode);
+        var transferPage = dashboardPage.selectCard(DataHelper.getFirsCard());
+        transferPage.transferMoneyNoAmount(DataHelper.getSecondCard());
+        transferPage.checkErrorMassage();
+    }
 }
