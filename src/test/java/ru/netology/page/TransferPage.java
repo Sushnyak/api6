@@ -4,6 +4,9 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.conditions.Visible;
 import ru.netology.data.DataHelper;
+import ru.netology.page.DashboardPage;
+
+import java.util.Random;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -34,6 +37,20 @@ public class TransferPage {
         cardWriteOff.setValue(cardInfo.getCardNumber());
         buttonTransfer.click();
         return new DashboardPage();
+    }
+
+    private int generateAmount() {
+        int amount = 0;
+        var dashboardPage = new DashboardPage();
+        int firstCardBalance = dashboardPage.getCardBalance(DataHelper.getFirsCard());
+        int secondCardBalance = dashboardPage.getCardBalance(DataHelper.getSecondCard());
+        if (firstCardBalance == secondCardBalance){
+            return amount = 1500;
+        } else if(firstCardBalance > secondCardBalance){
+            return amount = 2000;
+        } else {
+            return amount = 1000;
+        }
     }
 
     public void checkErrorMassage() {
