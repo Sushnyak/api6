@@ -20,7 +20,7 @@ public class IbankTest {
 
     @Test
     void shouldSuccessfulTransferFromSecondToFirst(){
-        int amount = 100;
+        int amount = DataHelper.generateAmount(DataHelper.getSecondCard());
         var info = DataHelper.getAuthInfo();
         var verificationCode = DataHelper.getVerificationCode();
         var loginPage = new LoginPage();

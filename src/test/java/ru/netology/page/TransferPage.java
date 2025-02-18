@@ -20,8 +20,8 @@ public class TransferPage {
         amountInput.shouldBe(visible);
     }
 
-    public DashboardPage transferMoney(String amount, DataHelper.CardInfo cardInfo) {
-        amountInput.setValue(amount);
+    public DashboardPage transferMoney(String value, DataHelper.CardInfo cardInfo) {
+        amountInput.setValue(value);
         cardWriteOff.setValue(cardInfo.getCardNumber());
         buttonTransfer.click();
         return new DashboardPage();
@@ -37,20 +37,6 @@ public class TransferPage {
         cardWriteOff.setValue(cardInfo.getCardNumber());
         buttonTransfer.click();
         return new DashboardPage();
-    }
-
-    private int generateAmount() {
-        int amount = 0;
-        var dashboardPage = new DashboardPage();
-        int firstCardBalance = dashboardPage.getCardBalance(DataHelper.getFirsCard());
-        int secondCardBalance = dashboardPage.getCardBalance(DataHelper.getSecondCard());
-        if (firstCardBalance == secondCardBalance){
-            return amount = 1500;
-        } else if(firstCardBalance > secondCardBalance){
-            return amount = 2000;
-        } else {
-            return amount = 1000;
-        }
     }
 
     public void checkErrorMassage() {

@@ -20,6 +20,7 @@ public class DashboardPage {
         header.shouldBe(Condition.visible);
     }
 
+
     private SelenideElement getCard(DataHelper.CardInfo cardInfo){
         return cards.findBy(Condition.attribute("data-test-id", cardInfo.getDataTestId()));
     }
