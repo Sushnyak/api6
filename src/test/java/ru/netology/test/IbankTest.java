@@ -20,12 +20,12 @@ public class IbankTest {
 
     @Test
     void shouldSuccessfulTransferFromSecondToFirst(){
-        int amount = DataHelper.generateAmount(DataHelper.getSecondCard());
         var info = DataHelper.getAuthInfo();
         var verificationCode = DataHelper.getVerificationCode();
         var loginPage = new LoginPage();
         var verificationPage = loginPage.validLogin(info);
         var dashboardPage = verificationPage.validVerify(verificationCode);
+        int amount = DataHelper.generateAmount(DataHelper.getSecondCard());
         var firstCardBalanceStart = dashboardPage.getCardBalance(DataHelper.getFirsCard());
         var secondCardBalanceStart = dashboardPage.getCardBalance(DataHelper.getSecondCard());
         var transferPage = dashboardPage.selectCard(DataHelper.getFirsCard());
@@ -40,12 +40,12 @@ public class IbankTest {
 
     @Test
     void shouldSuccessfulTransferFromFirstToSecond(){
-        int amount = 200;
         var info = DataHelper.getAuthInfo();
         var verificationCode = DataHelper.getVerificationCode();
         var loginPage = new LoginPage();
         var verificationPage = loginPage.validLogin(info);
         var dashboardPage = verificationPage.validVerify(verificationCode);
+        int amount = DataHelper.generateAmount(DataHelper.getSecondCard());
         var firstCardBalanceStart = dashboardPage.getCardBalance(DataHelper.getFirsCard());
         var secondCardBalanceStart = dashboardPage.getCardBalance(DataHelper.getSecondCard());
         var transferPage = dashboardPage.selectCard(DataHelper.getSecondCard());
@@ -73,12 +73,12 @@ public class IbankTest {
 
     @Test
     void shouldReturnErrorIfNoCardNumber() {
-        int amount = 1000;
         var info = DataHelper.getAuthInfo();
         var verificationCode = DataHelper.getVerificationCode();
         var loginPage = new LoginPage();
         var verificationPage = loginPage.validLogin(info);
         var dashboardPage = verificationPage.validVerify(verificationCode);
+        int amount = DataHelper.generateAmount(DataHelper.getSecondCard());
         var transferPage = dashboardPage.selectCard(DataHelper.getFirsCard());
         transferPage.transferMoneyNoCardNumber(Integer.toString(amount));
         transferPage.checkErrorMassage();
