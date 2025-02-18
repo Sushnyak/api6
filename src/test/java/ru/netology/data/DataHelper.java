@@ -26,13 +26,20 @@ public class DataHelper {
                 "0f3f5c2a-249e-4c3d-8287-09f7a039391d");
     }
 
-    public static int generateAmount(CardInfo cardInfo){
-        var dashboardPage = new DashboardPage();
+    public static int generateAmount(int cardBalance){
         int minValue = 0;
-        int maxValue = dashboardPage.getCardBalance(cardInfo);
+        int maxValue = cardBalance;
         int randomValue = minValue + (int) (Math.random() * (maxValue - minValue + 1));
         return randomValue;
     }
+
+    public static int generateInvalidAmount(int cardBalance){
+        int minValue = 0;
+        int maxValue = cardBalance;
+        int randomValue = minValue + (int) (Math.random() * (maxValue - minValue + 1)) + 25000;
+        return randomValue;
+    }
+
 
     @Value
     public static class AuthInfo{

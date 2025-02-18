@@ -25,9 +25,9 @@ public class IbankTest {
         var loginPage = new LoginPage();
         var verificationPage = loginPage.validLogin(info);
         var dashboardPage = verificationPage.validVerify(verificationCode);
-        int amount = DataHelper.generateAmount(DataHelper.getSecondCard());
         var firstCardBalanceStart = dashboardPage.getCardBalance(DataHelper.getFirsCard());
         var secondCardBalanceStart = dashboardPage.getCardBalance(DataHelper.getSecondCard());
+        int amount = DataHelper.generateAmount(secondCardBalanceStart);
         var transferPage = dashboardPage.selectCard(DataHelper.getFirsCard());
         transferPage.transferMoney(Integer.toString(amount), DataHelper.getSecondCard());
         var firstCardBalanceFinish = firstCardBalanceStart + amount;
@@ -45,9 +45,9 @@ public class IbankTest {
         var loginPage = new LoginPage();
         var verificationPage = loginPage.validLogin(info);
         var dashboardPage = verificationPage.validVerify(verificationCode);
-        int amount = DataHelper.generateAmount(DataHelper.getSecondCard());
         var firstCardBalanceStart = dashboardPage.getCardBalance(DataHelper.getFirsCard());
         var secondCardBalanceStart = dashboardPage.getCardBalance(DataHelper.getSecondCard());
+        int amount = DataHelper.generateAmount(firstCardBalanceStart);
         var transferPage = dashboardPage.selectCard(DataHelper.getSecondCard());
         transferPage.transferMoney(Integer.toString(amount), DataHelper.getFirsCard());
         var firstCardBalanceFinish = firstCardBalanceStart - amount;
@@ -65,7 +65,9 @@ public class IbankTest {
         var loginPage = new LoginPage();
         var verificationPage = loginPage.validLogin(info);
         var dashboardPage = verificationPage.validVerify(verificationCode);
-        int amount = dashboardPage.getCardBalance(DataHelper.getFirsCard()) + 1000;
+        var firstCardBalanceStart = dashboardPage.getCardBalance(DataHelper.getFirsCard());
+        var secondCardBalanceStart = dashboardPage.getCardBalance(DataHelper.getSecondCard());
+        int amount = DataHelper.generateInvalidAmount(secondCardBalanceStart);
         var transferPage = dashboardPage.selectCard(DataHelper.getFirsCard());
         transferPage.transferMoney(Integer.toString(amount), DataHelper.getSecondCard());
         transferPage.checkErrorMassage();
@@ -78,7 +80,9 @@ public class IbankTest {
         var loginPage = new LoginPage();
         var verificationPage = loginPage.validLogin(info);
         var dashboardPage = verificationPage.validVerify(verificationCode);
-        int amount = DataHelper.generateAmount(DataHelper.getSecondCard());
+        var firstCardBalanceStart = dashboardPage.getCardBalance(DataHelper.getFirsCard());
+        var secondCardBalanceStart = dashboardPage.getCardBalance(DataHelper.getSecondCard());
+        int amount = DataHelper.generateAmount(secondCardBalanceStart);
         var transferPage = dashboardPage.selectCard(DataHelper.getFirsCard());
         transferPage.transferMoneyNoCardNumber(Integer.toString(amount));
         transferPage.checkErrorMassage();
@@ -86,7 +90,6 @@ public class IbankTest {
 
     @Test
     void shouldReturnErrorIfNoAmount() {
-        int amount = 1000;
         var info = DataHelper.getAuthInfo();
         var verificationCode = DataHelper.getVerificationCode();
         var loginPage = new LoginPage();
